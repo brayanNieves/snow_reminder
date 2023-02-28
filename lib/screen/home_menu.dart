@@ -248,7 +248,7 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('WordMeaning')
-          //.where('user_id', isEqualTo: UserService.getUserId())
+          .where('user_id', isEqualTo: UserService.getUserId())
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
