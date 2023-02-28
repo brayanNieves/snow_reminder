@@ -54,49 +54,53 @@ class _WordListScreenState extends State<WordListScreen> {
               Consumer<WordBloc>(
                   builder: (BuildContext context, wordBloc, Widget? child) {
                 if (wordBloc.loading) {
-                  return const Expanded(child: Center(child: CircularProgressIndicator()));
+                  return const Expanded(
+                      child: Center(child: CircularProgressIndicator()));
                 } else {
+                  if (wordBloc.words.isEmpty) {
+                    return const Expanded(
+                        child: Center(child: Text('No tienes palabras agregadas')));
+                  }
                   return Expanded(
-                        child: ListView.separated(
-                          itemBuilder: (context, int index) {
-                            WordModel wordModel = wordBloc.words[index];
-                            return ListTile(
-                              title: Text(
-                                wordModel.word,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                    child: ListView.separated(
+                      itemBuilder: (context, int index) {
+                        WordModel wordModel = wordBloc.words[index];
+                        return ListTile(
+                          title: Text(
+                            wordModel.word,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 8.0,
                               ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 8.0,
-                                  ),
-                                  Text('Significado: ${wordModel.meaning}'),
-                                  const SizedBox(
-                                    height: 4.0,
-                                  ),
-                                  Text('Descripción: ${wordModel.desc}'),
-                                ],
+                              Text('Significado: ${wordModel.meaning}'),
+                              const SizedBox(
+                                height: 4.0,
                               ),
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.redAccent,
-                                ),
-                                onPressed: () {
-                                  confirmDeleteBottomSheet(
-                                      context, wordModel.id, index);
-                                },
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, int index) {
-                            return const Divider();
-                          },
-                          itemCount: wordBloc.words.length,
-                        ),
-                      );
+                              Text('Descripción: ${wordModel.desc}'),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.redAccent,
+                            ),
+                            onPressed: () {
+                              confirmDeleteBottomSheet(
+                                  context, wordModel.id, index);
+                            },
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, int index) {
+                        return const Divider();
+                      },
+                      itemCount: wordBloc.words.length,
+                    ),
+                  );
                 }
               }),
             ],
