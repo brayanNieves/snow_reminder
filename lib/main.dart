@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sow_remember/bloc/words_bloc.dart';
 import 'package:sow_remember/router_generator.dart';
@@ -8,13 +9,25 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyDxaLQHYwOuRECBhQXvoUZK5Ny2ONbv4RI",
+            authDomain: "snowreminder.firebaseapp.com",
+            projectId: "snowreminder",
+            storageBucket: "snowreminder.appspot.com",
+            messagingSenderId: "956980853629",
+            appId: "1:956980853629:web:ccf6a466444a07a1b86a14"));
+    String url = Uri.base.toString();
+    // String para1 = Uri.base.queryParameters["para1"]!;
+  } else {
+    await Firebase.initializeApp();
+  }
   await Firebase.initializeApp();
-  runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => UserBloc()),
-        ChangeNotifierProvider(create: (_) => WordBloc()),
-      ],
-      child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => UserBloc()),
+    ChangeNotifierProvider(create: (_) => WordBloc()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
