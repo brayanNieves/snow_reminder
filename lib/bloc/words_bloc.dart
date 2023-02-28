@@ -25,8 +25,8 @@ class WordBloc with ChangeNotifier {
       words = words
         ..sort((a, b) => a.word.toLowerCase().compareTo(b.word.toLowerCase()));
       _firstList = words;
-      loading = false;
     }
+    loading = false;
     notifyListeners();
   }
 

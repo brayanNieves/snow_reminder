@@ -245,7 +245,6 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
   }
 
   Widget countWord() {
-    print(UserService.getUserId());
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('WordMeaning')
