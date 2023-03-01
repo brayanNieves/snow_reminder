@@ -18,12 +18,11 @@ void main() async {
             storageBucket: "snowreminder.appspot.com",
             messagingSenderId: "956980853629",
             appId: "1:956980853629:web:ccf6a466444a07a1b86a14"));
-    String url = Uri.base.toString();
+    // String url = Uri.base.toString();
     // String para1 = Uri.base.queryParameters["para1"]!;
   } else {
     await Firebase.initializeApp();
   }
-  await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => UserBloc()),
     ChangeNotifierProvider(create: (_) => WordBloc()),
