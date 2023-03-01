@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "956980853629",
+    "project_id": "snowreminder",
+    "storage_bucket": "snowreminder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956980853629:android:7907d66e5d7d82c9b86a14",
+        "android_client_info": {
+          "package_name": "com.snow.remember.sow_remember"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956980853629-e0ptumdrvr8v4p87o5uqb6p71ba19ucl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAOBR47OKcbjH_31XthA5DtNyTJW9G30s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956980853629-e0ptumdrvr8v4p87o5uqb6p71ba19ucl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "956980853629-2jqi1ealq5mn2kkkblh5i0i33ausel86.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.snow.remember"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
