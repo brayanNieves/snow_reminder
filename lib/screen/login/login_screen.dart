@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (value) {
                                     context.read<UserBloc>().init();
                                     Navigator.pushReplacementNamed(
-                                        context, Routers.home);
+                                        context, Routers.noteList);
                                   } else {
                                     SnackBarUtil.showSnackBar(context,
                                         'Usuario o contraseña invalido');

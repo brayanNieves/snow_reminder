@@ -4,6 +4,8 @@ import 'package:sow_remember/screen/home_menu.dart';
 import 'package:sow_remember/routers.dart';
 import 'package:sow_remember/screen/login/login_screen.dart';
 import 'package:sow_remember/screen/login/sign_up_screen.dart';
+import 'package:sow_remember/screen/notes/create_note_screen.dart';
+import 'package:sow_remember/screen/notes/note_list_screen.dart';
 import 'package:sow_remember/screen/splash_screen.dart';
 
 class RouteGenerator {
@@ -22,6 +24,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routers.login:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routers.noteList:
+        return MaterialPageRoute(builder: (_) => const NoteListScreen());
+      case Routers.newNote:
+        return MaterialPageRoute(builder: (_) => const CreateNoteScreen());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return MaterialPageRoute(
