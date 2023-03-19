@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sow_remember/bloc/user_bloc.dart';
 import 'package:sow_remember/commons/custom_loading.dart';
 import 'package:sow_remember/routers.dart';
 import 'package:sow_remember/screen/home_menu.dart';
@@ -18,6 +20,37 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        title: Row(
+          children: [
+            Text(
+              'Hola ${context.watch<UserBloc>().username}',
+              style: const TextStyle(
+                  fontSize: 24.0, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(
+              width: 8.0,
+            ),
+            const Icon(Icons.waving_hand_sharp)
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  UserService.logout();
+                  Navigator.pushReplacementNamed(context, Routers.login);
+                },
+                icon: const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.red,
+                  size: 35.0,
+                )),
+          )
+        ],
+      ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {

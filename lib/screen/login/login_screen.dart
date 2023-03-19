@@ -51,15 +51,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 22.0,
                       ),
-                      const Text(
-                        'Snow Reminder',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 32.0, fontWeight: FontWeight.w800),
-                      ),
-                      const SizedBox(
-                        height: 22.0,
-                      ),
+                      // const Text(
+                      //   'Snow Reminder',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //       fontSize: 32.0, fontWeight: FontWeight.w800),
+                      // ),
+                      // const SizedBox(
+                      //   height: 22.0,
+                      // ),
                       TextFormField(
                         controller: _txtEmail,
                         keyboardType: TextInputType.emailAddress,
