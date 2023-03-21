@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sow_remember/bloc/user_bloc.dart';
 import 'package:sow_remember/commons/custom_loading.dart';
 import 'package:sow_remember/service/user_service.dart';
 
@@ -100,6 +102,7 @@ class _CreateWordScreenState extends State<CreateWordScreen> {
                               .doc()
                               .set({
                             'word': _wordController.text,
+                            'user': context.read<UserBloc>().username,
                             'meaning': _meaningController.text,
                             'description': _descriptionController.text,
                             'user_id': UserService.getUserId()
