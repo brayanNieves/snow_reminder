@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sow_remember/bloc/words_bloc.dart';
+import 'package:sow_remember/commons/custom_search.dart';
 import 'package:sow_remember/models/word_model.dart';
 import 'package:sow_remember/routers.dart';
+import 'package:sow_remember/screen/search/search_word_screen.dart';
 
 import '../commons/custom_loading.dart';
 import 'home_menu.dart';
@@ -39,18 +41,16 @@ class _WordListScreenState extends State<WordListScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //       horizontal: 16.0, vertical: 12.0),
-              //   child: TextField(
-              //     onChanged: (value) {
-              //       context.read<WordBloc>().filterWord(value);
-              //     },
-              //     onEditingComplete: () {
-              //       print('onEditingComplete()');
-              //     },
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SearchPlaceHolder(
+                  onTap: () =>
+                      Navigator.popAndPushNamed(context, SearchWorldScreen.route),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
               Consumer<WordBloc>(
                   builder: (BuildContext context, wordBloc, Widget? child) {
                 if (wordBloc.loading) {
@@ -59,7 +59,8 @@ class _WordListScreenState extends State<WordListScreen> {
                 } else {
                   if (wordBloc.words.isEmpty) {
                     return const Expanded(
-                        child: Center(child: Text('No tienes palabras agregadas')));
+                        child: Center(
+                            child: Text('No tienes palabras agregadas')));
                   }
                   return Expanded(
                     child: ListView.separated(

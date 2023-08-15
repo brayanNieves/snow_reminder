@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:sow_remember/bloc/words_bloc.dart';
+import 'package:sow_remember/commons/custom_search.dart';
 import 'package:sow_remember/routers.dart';
+import 'package:sow_remember/screen/search/search_word_screen.dart';
 import 'package:sow_remember/screen/word_list.dart';
 import 'package:sow_remember/bloc/user_bloc.dart';
 
@@ -93,38 +96,53 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Row(
-              children: [
-                Text(
-                  'Hola ${context.watch<UserBloc>().username}',
-                  style: const TextStyle(
-                      fontSize: 24.0, fontWeight: FontWeight.w800),
-                ),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                const Icon(Icons.waving_hand_sharp)
-              ],
-            ),
             centerTitle: false,
             pinned: true,
-            toolbarHeight: 90.0,
+            toolbarHeight: 160.0,
             elevation: 0.0,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                    onPressed: () {
-                      UserService.logout();
-                      Navigator.pushReplacementNamed(context, Routers.login);
-                    },
-                    icon: const Icon(
-                      Icons.exit_to_app,
-                      color: Colors.red,
-                      size: 35.0,
-                    )),
-              )
-            ],
+            title: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            'Hola ${context.watch<UserBloc>().username}',
+                            style: const TextStyle(
+                                fontSize: 24.0, fontWeight: FontWeight.w800),
+                          ),
+                          const SizedBox(
+                            width: 8.0,
+                          ),
+                          const Icon(Icons.waving_hand_sharp),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                          onPressed: () {
+                            UserService.logout();
+                            Navigator.pushReplacementNamed(
+                                context, Routers.login);
+                          },
+                          icon: const Icon(
+                            Icons.exit_to_app,
+                            color: Colors.red,
+                            size: 35.0,
+                          )),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 4.0,),
+                SearchPlaceHolder(
+                  onTap: () =>
+                      Navigator.pushNamed(context, SearchWorldScreen.route),
+                ),
+              ],
+            ),
           ),
           SliverPadding(
             padding: const EdgeInsets.only(top: 50.0, left: 12.0, right: 12.0),
@@ -296,7 +314,7 @@ class BottomSheetBorder extends StatelessWidget {
 }
 
 Widget buildDraggable(ScrollableWidgetBuilder scrollableWidgetBuilder,
-    {double initialChildSize = 0.95, double maxChildSize = 0.95}) {
+    {double initialChildSize = 0.93, double maxChildSize = 0.95}) {
   return DraggableScrollableSheet(
     initialChildSize: initialChildSize,
     minChildSize: 0.2,

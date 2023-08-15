@@ -6,6 +6,7 @@ import 'package:sow_remember/screen/login/login_screen.dart';
 import 'package:sow_remember/screen/login/sign_up_screen.dart';
 import 'package:sow_remember/screen/notes/create_note_screen.dart';
 import 'package:sow_remember/screen/notes/note_list_screen.dart';
+import 'package:sow_remember/screen/search/search_word_screen.dart';
 import 'package:sow_remember/screen/splash_screen.dart';
 
 class RouteGenerator {
@@ -28,6 +29,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const NoteListScreen());
       case Routers.newNote:
         return MaterialPageRoute(builder: (_) => const CreateNoteScreen());
+      case SearchWorldScreen.route:
+        return MaterialPageRoute(builder: (_) => const SearchWorldScreen());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return MaterialPageRoute(

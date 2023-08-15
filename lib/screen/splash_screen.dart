@@ -16,10 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       context.read<UserBloc>().init().then((value) {
         Navigator.pushReplacementNamed(
-            context, UserService.isUserLogged() ? Routers.noteList : Routers.login);
+            context, UserService.isUserLogged() ? Routers.home : Routers.login);
       });
     });
   }

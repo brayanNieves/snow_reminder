@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sow_remember/commons/custom_loading.dart';
 import 'package:sow_remember/routers.dart';
 import 'package:sow_remember/utils.dart';
-
 import '../../service/user_service.dart';
 import '../../snack.dart';
 import '../../bloc/user_bloc.dart';
@@ -110,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (value) {
                                     context.read<UserBloc>().init();
                                     Navigator.pushReplacementNamed(
-                                        context, Routers.noteList);
+                                        context, Routers.home);
                                   } else {
                                     SnackBarUtil.showSnackBar(context,
                                         'Usuario o contraseña invalido');
