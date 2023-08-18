@@ -51,7 +51,7 @@ class WordBloc with ChangeNotifier {
       notifyListeners();
       return;
     }
-    words = words
+    words = _firstList
         .where((element) =>
             element.desc.toLowerCase().contains(query.toLowerCase()) ||
             element.meaning.toLowerCase().contains(query.toLowerCase()) ||

@@ -54,6 +54,21 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
         key: 'REMINDER',
         paddingTop: -70),
     _MenuModel(
+        title: 'Palabras en inglés',
+        description: 'Agrega tus palabras en inglés y traducelas',
+        color: Colors.orange,
+        qty: 190,
+        icon: Lottie.asset('assets/animations/light2.json',
+            width: 90.0, height: 90.0, fit: BoxFit.fill, repeat: true),
+        // Icon(
+        //   Icons.lightbulb,
+        //   size: 90.0,
+        //   color: Colors.yellow,
+        // ),
+        route: Routers.createWord,
+        key: 'WORD',
+        paddingTop: -40),
+    _MenuModel(
         title: 'Verbos irregulares',
         description: 'Agrega los verbos irregulares',
         color: Colors.blueAccent,
@@ -73,21 +88,6 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
         route: '',
         key: 'REMINDER',
         paddingTop: -55),
-    _MenuModel(
-        title: 'Palabras en inglés',
-        description: 'Agrega tus palabras en inglés y traducelas',
-        color: Colors.orange,
-        qty: 190,
-        icon: Lottie.asset('assets/animations/light2.json',
-            width: 90.0, height: 90.0, fit: BoxFit.fill, repeat: true),
-        // Icon(
-        //   Icons.lightbulb,
-        //   size: 90.0,
-        //   color: Colors.yellow,
-        // ),
-        route: Routers.createWord,
-        key: 'WORD',
-        paddingTop: -50),
   ];
 
   @override
@@ -111,7 +111,7 @@ class _HomeMenuScreenState extends State<HomeMenuScreen> {
                           Text(
                             'Hola ${context.watch<UserBloc>().username}',
                             style: const TextStyle(
-                                fontSize: 24.0, fontWeight: FontWeight.w800),
+                                fontSize: 26.0, fontWeight: FontWeight.w800),
                           ),
                           const SizedBox(
                             width: 8.0,

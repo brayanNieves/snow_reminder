@@ -1,18 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sow_remember/bloc/words_bloc.dart';
 import 'package:sow_remember/commons/custom_search.dart';
 import 'package:sow_remember/models/word_model.dart';
 import 'package:sow_remember/routers.dart';
+import 'package:sow_remember/screen/delete_word_dialog.dart';
 import 'package:sow_remember/screen/search/search_word_screen.dart';
-
-import '../commons/custom_loading.dart';
 import 'home_menu.dart';
 
 class WordListScreen extends StatefulWidget {
   const WordListScreen({Key? key}) : super(key: key);
+
 
   @override
   State<WordListScreen> createState() => _WordListScreenState();
@@ -21,12 +19,14 @@ class WordListScreen extends StatefulWidget {
 class _WordListScreenState extends State<WordListScreen> {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<WordBloc>().getWords();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<WordBloc>().getWords();
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: LayoutBuilder(
@@ -44,8 +44,8 @@ class _WordListScreenState extends State<WordListScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SearchPlaceHolder(
-                  onTap: () =>
-                      Navigator.popAndPushNamed(context, SearchWorldScreen.route),
+                  onTap: () => Navigator.popAndPushNamed(
+                      context, SearchWorldScreen.route),
                 ),
               ),
               const SizedBox(
@@ -118,77 +118,6 @@ class _WordListScreenState extends State<WordListScreen> {
           onPressed: () =>
               Navigator.popAndPushNamed(context, Routers.createWord)),
     );
-  }
-
-  Future<dynamic> confirmDeleteBottomSheet(
-      BuildContext context, String id, int index) async {
-    dynamic value = await showModalBottomSheet(
-      context: context,
-      // backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25.0),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildBottomSheetLine(),
-              const Text(
-                '¡Ups!',
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const Divider(),
-              const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  '¿Deseas eliminar esta palabra o frase, al eliminarla no podras recuperarla?',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BuildCustomButton(
-                      color: Colors.redAccent,
-                      widget: const Text(
-                        'Eliminar',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {
-                        CustomLoading.show(context);
-                        context.read<WordBloc>().deleteWord(id, context, index);
-                      },
-                    ),
-                    BuildCustomButton(
-                        color: Colors.orange,
-                        widget: const Text(
-                          'Cancelar',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onPressed: () => Navigator.pop(context)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-    return value;
   }
 }
 

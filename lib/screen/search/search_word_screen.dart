@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sow_remember/bloc/words_bloc.dart';
 import 'package:sow_remember/commons/custom_search.dart';
 import 'package:sow_remember/models/word_model.dart';
+import 'package:sow_remember/screen/delete_word_dialog.dart';
 
 class SearchWorldScreen extends StatefulWidget {
   static const String route = '/search_word_page';
@@ -14,7 +15,13 @@ class SearchWorldScreen extends StatefulWidget {
 }
 
 class _SearchWorldScreenState extends State<SearchWorldScreen> {
-  final _search = TextEditingController();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<WordBloc>().getWords();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +29,10 @@ class _SearchWorldScreenState extends State<SearchWorldScreen> {
       appBar: AppBar(
         elevation: 0.0,
         title: SnowEatsSearch(
-          controller: _search,
           borderRadius: 12.0,
-          onChanged: (String? query) =>
-              context.read<WordBloc>().filterWord(query ?? ''),
+          onChanged: (String? query) {
+            context.read<WordBloc>().filterWord(query ?? '');
+          },
         ),
         toolbarHeight: 90.0,
       ),
@@ -53,6 +60,15 @@ class _SearchWorldScreenState extends State<SearchWorldScreen> {
                     ),
                     Text('Descripción: ${wordModel.desc}'),
                   ],
+                ),
+                trailing: IconButton(
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.redAccent,
+                  ),
+                  onPressed: () {
+                    confirmDeleteBottomSheet(context, wordModel.id, index);
+                  },
                 ),
               );
             },
