@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sow_remember/bloc/user_bloc.dart';
 import 'package:sow_remember/commons/custom_loading.dart';
 import 'package:sow_remember/service/user_service.dart';
+import 'package:sow_remember/utils.dart';
 
 class CreateWordScreen extends StatefulWidget {
   const CreateWordScreen({Key? key}) : super(key: key);
@@ -105,7 +106,9 @@ class _CreateWordScreenState extends State<CreateWordScreen> {
                             'user': context.read<UserBloc>().username,
                             'meaning': _meaningController.text,
                             'description': _descriptionController.text,
-                            'user_id': UserService.getUserId()
+                            'user_id': UserService.getUserId(),
+                            'date': DateTime.now().toString(),
+                            'display_date': Utils.getFormatDate(DateTime.now())
                           }).then((value) {
                             _descriptionController.clear();
                             _meaningController.clear();
